@@ -34,7 +34,7 @@ public class TaskController : MonoBehaviour
         var x = Random.Range(0, Screen.width - taskWidth);
         var y = Random.Range(0, Screen.height - taskHeight );
 
-        var rt = task.gameCanvas.GetComponent<RectTransform>();
+        var rt = task.gameContainer.GetComponent<RectTransform>();
 
         rt.position = new Vector3(x, y);
         rt.sizeDelta = new Vector2(taskWidth, taskHeight);

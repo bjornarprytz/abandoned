@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TaskBehaviour : MonoBehaviour
 {
-    public Canvas gameCanvas;
+    public GameObject gameContainer;
     private MiniGame miniGame;
     // Start is called before the first frame update
     void Start()
@@ -25,12 +25,22 @@ public class TaskBehaviour : MonoBehaviour
     public void OnClickAbandon()
     {
         miniGame.OnAbandoned();
+        Destroy(gameObject);
     }
+
 
     public void StartGame(MiniGame gamePrefab)
     {
-        var go = Instantiate(gamePrefab, gameCanvas.transform);
+        var go = Instantiate(gamePrefab);
+        go.transform.SetParent(gameContainer.transform, false);
+        go.Init();
+        go.GameCompleted += Go_GameCompleted;
 
         miniGame = go;
+    }
+
+    private void Go_GameCompleted()
+    {
+        Destroy(gameObject);
     }
 }

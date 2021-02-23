@@ -10,6 +10,6 @@ public class ClickMe : MiniGame
     public void OnClickDestroy()
     {
         Debug.Log("It clicked Yay!");
-        Destroy(gameObject);
+        OnCompleted();
     }
 }
