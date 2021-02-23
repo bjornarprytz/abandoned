@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioClip crashAudioClip;
     public AudioClip cryAudioClip;
-    public AudioClip investorLaugh;
+    public AudioClip investorLaughAudioClip;
+    public AudioClip winnerAudioClip;
 
     public static float MovementSpeed { get; private set; }  = 0;
 
@@ -66,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
 
     public static void AlterMoveSpeed(float amount)
     {
+        if (MovementSpeed == 11)
+            Winner();
+
         if (amount > 0)
         {
             instance.audioPitch += instance.speedPitchIncrease;
@@ -76,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
             var randomRange = Random.Range(0, 100);
             if (randomRange < 25)
-                instance.audioSource.PlayOneShot(instance.investorLaugh);
+                instance.audioSource.PlayOneShot(instance.investorLaughAudioClip);
 
             if (randomRange > 75)
                 instance.audioSource.PlayOneShot(instance.cryAudioClip);
@@ -101,6 +105,16 @@ public class PlayerMovement : MonoBehaviour
         instance.audioSource.Stop();
         instance.audioSource.PlayOneShot(instance.crashAudioClip);
         instance.audioSource.PlayOneShot(instance.cryAudioClip);
-        instance.audioSource.PlayOneShot(instance.investorLaugh);
+        instance.audioSource.PlayOneShot(instance.investorLaughAudioClip);
+    }
+
+    public static void Winner()
+    {
+        if (instance.isDead) return;
+
+        instance.isDead = true;
+        instance.audioSource.Stop();
+        instance.audioPitch = 1;
+        instance.audioSource.PlayOneShot(instance.winnerAudioClip);
     }
 }
