@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameCanvas: {fileID: 6973606742430516052}
   onStartAudioClip: {fileID: 0}
-  onCompleteAudioClip: {fileID: 0}
+  onCompleteAudioClip: {fileID: 8300000, guid: 76fdcb29577f4d34889ebddb7e029d09, type: 3}
   gearUp: {fileID: 853976093943440643}
   gearRight: {fileID: 4933594432574778936}
+  gearSound: {fileID: 8300000, guid: 76fdcb29577f4d34889ebddb7e029d09, type: 3}

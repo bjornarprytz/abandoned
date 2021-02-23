@@ -8,6 +8,8 @@ public class GearShift : MiniGame
     public Slider gearUp;
     public Slider gearRight;
 
+    public AudioClip gearSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +31,16 @@ public class GearShift : MiniGame
 
     private void CheckProgress()
     {
-        if (gearUp.value == 1)
+        if (gearUp.IsActive() && gearUp.value == 1)
         {
             gearRight.gameObject.SetActive(true);
             gearUp.gameObject.SetActive(false);
+            audioSource.PlayOneShot(gearSound);
         }
 
         if (gearRight.value == 1)
+        {
             OnCompleted();
+        }
     }
 }
