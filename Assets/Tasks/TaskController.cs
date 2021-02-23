@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TaskController : MonoBehaviour
@@ -5,6 +6,8 @@ public class TaskController : MonoBehaviour
     public static TaskController Instance { get; private set; }
     public TaskBehaviour taskPrefab;
     public MiniGame[] miniGamePool;
+
+    private static Queue<TaskBehaviour> AbandonedTasks { get; set; } = new Queue<TaskBehaviour>();
 
     public void Awake()
     {
@@ -23,6 +26,19 @@ public class TaskController : MonoBehaviour
         }
     }
 
+    public static TaskBehaviour RedoPooledTask()
+    {
+        var task = AbandonedTasks.Dequeue();
+
+        Debug.Log("Redoing task");
+
+        if (task != null)
+        {
+            task.ResumeGame();
+        }
+
+        return task;
+    }
 
     public static TaskBehaviour CreateTask()
     {
@@ -42,6 +58,13 @@ public class TaskController : MonoBehaviour
         task.StartGame(ChooseGame());
 
         return task;
+    }
+
+    public static void AddToPool(TaskBehaviour abandonedTask)
+    {
+        Debug.Log("Adding task to pool");
+
+        AbandonedTasks.Enqueue(abandonedTask);
     }
 
     private static MiniGame ChooseGame()

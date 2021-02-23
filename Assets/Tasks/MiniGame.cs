@@ -15,11 +15,20 @@ public abstract class MiniGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public virtual void Init() { }
     public virtual void OnAbandoned() { }
+
+    public virtual void OnPause() 
+    {
+        enabled = false;
+    }
+
+    public virtual void OnResume() 
+    {
+        enabled = false;
+    }
 
     // Call this when the player completes the task
     public virtual void OnCompleted() 

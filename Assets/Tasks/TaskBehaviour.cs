@@ -24,8 +24,20 @@ public class TaskBehaviour : MonoBehaviour
 
     public void OnClickAbandon()
     {
-        miniGame.OnAbandoned();
-        Destroy(gameObject);
+        PlayerMovement.AlterMoveSpeed(-1);
+
+        miniGame.OnPause();
+
+        TaskController.AddToPool(this);
+
+        gameContainer.SetActive(false);
+    }
+
+    public void ResumeGame()
+    {
+        gameContainer.SetActive(true);
+
+        miniGame.OnResume();
     }
 
 
@@ -41,6 +53,7 @@ public class TaskBehaviour : MonoBehaviour
 
     private void Go_GameCompleted()
     {
+        PlayerMovement.AlterMoveSpeed(1);
         Destroy(gameObject);
     }
 }
