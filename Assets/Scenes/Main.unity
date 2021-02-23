@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4316864355612128, guid: 7647dab7c25d80b4e925372dfcd8ec47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.52
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 4316864355612128, guid: 7647dab7c25d80b4e925372dfcd8ec47, type: 3}
       propertyPath: m_LocalPosition.z
@@ -399,6 +399,7 @@ MonoBehaviour:
   taskPrefab: {fileID: 7182368373454272952, guid: ebb23b7844553094abada2b7bb453c3c, type: 3}
   miniGamePool:
   - {fileID: 1389103901707794342, guid: 445e8792377747a44b664497903c8fd5, type: 3}
+  - {fileID: -3948062084086590534, guid: 14ea6b7efe85be14e90ccbdc6c67f54d, type: 3}
   - {fileID: 8668476322798510321, guid: 681d140c6f4209640b368da91977a9dc, type: 3}
   - {fileID: -3948062084086590534, guid: 14ea6b7efe85be14e90ccbdc6c67f54d, type: 3}
   notificationAudioClip: {fileID: 8300000, guid: 586b78d59fb350743bdb6e6dcd7f9dcd, type: 3}
