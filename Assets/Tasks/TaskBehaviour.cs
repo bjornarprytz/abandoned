@@ -5,6 +5,7 @@ using UnityEngine;
 public class TaskBehaviour : MonoBehaviour
 {
     public GameObject gameContainer;
+    public GameObject abandonButton;
     private MiniGame miniGame;
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,8 @@ public class TaskBehaviour : MonoBehaviour
         go.GameCompleted += Go_GameCompleted;
 
         miniGame = go;
+
+        abandonButton.transform.SetAsLastSibling();
     }
 
     private void Go_GameCompleted()
