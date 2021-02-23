@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public float currentDifficulty = 1;
     public float currentSpeedAlteredDifficulty = 0;
 
+    private float taskCountDown = 2;
+    public float baseTaskFrequency = 3;
+
     // Update is called once per frame
     void Update()
     {
@@ -19,5 +22,16 @@ public class GameManager : MonoBehaviour
             PlayerMovement.AlterMoveSpeed(1);
         if (Input.GetKeyDown(KeyCode.S))
             PlayerMovement.AlterMoveSpeed(-1);
+
+        taskCountDown -= Time.deltaTime;
+
+        if (taskCountDown < 0)
+        {
+            taskCountDown = baseTaskFrequency - currentDifficulty;
+
+            TaskController.CreateTask();
+            TaskController.RedoPooledTask();
+        }
+
     }
 }
