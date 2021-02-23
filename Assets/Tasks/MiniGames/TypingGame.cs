@@ -15,6 +15,8 @@ public class TypingGame : MiniGame
         "i++;",
         "thanks",
         "yes",
+        "fix",
+        "win",
     };
 
 
