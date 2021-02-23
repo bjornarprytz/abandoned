@@ -19,14 +19,25 @@ public class TaskController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            CreateTask(RandomPosition());
+            CreateTask();
         }
     }
 
 
-    public static TaskBehaviour CreateTask(Vector3 screenPosition)
+    public static TaskBehaviour CreateTask()
     {
-        var task = Instantiate(Instance.taskPrefab);
+        var task = Instantiate(Instance.taskPrefab, Camera.main.transform);
+
+        var taskWidth = Screen.width / 8;
+        var taskHeight = Screen.height / 8;
+
+        var x = Random.Range(0, Screen.width - taskWidth);
+        var y = Random.Range(0, Screen.height - taskHeight );
+
+        var rt = task.gameCanvas.GetComponent<RectTransform>();
+
+        rt.position = new Vector3(x, y);
+        rt.sizeDelta = new Vector2(taskWidth, taskHeight);
 
         task.StartGame(ChooseGame());
 
@@ -37,16 +48,4 @@ public class TaskController : MonoBehaviour
     {
         return Instance.miniGamePool[Random.Range(0, Instance.miniGamePool.Length)];
     }
-
-    private static Vector3 RandomPosition()
-    {
-        var width = Random.Range(0, Screen.width);
-        var height = Random.Range(0, Screen.height);
-
-        width = Screen.width / 2;
-        height = Screen.height / 2;
-
-        return new Vector3(width, height, 0);
-    }
-
 }
