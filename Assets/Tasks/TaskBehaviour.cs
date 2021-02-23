@@ -55,5 +55,6 @@ public class TaskBehaviour : MonoBehaviour
     {
         PlayerMovement.AlterMoveSpeed(1);
         Destroy(gameObject);
+        Debug.Log("Game Complete!");
     }
 }

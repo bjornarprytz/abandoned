@@ -31,6 +31,8 @@ public class TypingGame : MiniGame
         {
             CheckProgress(Input.inputString);
         }
+
+        textProgress.fontSize = textTarget.fontSize;
     }
 
     public override void Init()
@@ -46,18 +48,20 @@ public class TypingGame : MiniGame
 
     void CheckProgress(string inputString) 
     {
+        if (nextCharIdx >= textTarget.text.Length) return;
+
         var nextChar = textTarget.text[nextCharIdx];
 
-        while (nextChar == inputString[0])
+        while (inputString.Length > 0 && nextChar == inputString[0])
         {
             textProgress.text += nextChar;
 
             inputString = inputString.Substring(1);
 
+            nextCharIdx++;
+            
             if (nextCharIdx == textTarget.text.Length)
                 break;
-            
-            nextCharIdx++;
             
             nextChar = textTarget.text[nextCharIdx];
 
@@ -66,6 +70,7 @@ public class TypingGame : MiniGame
         if (textProgress.text == textTarget.text)
         {
             OnCompleted();
+            Debug.Log("Typing Finished");
         }
     }
 }

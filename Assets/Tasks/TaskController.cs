@@ -26,10 +26,6 @@ public class TaskController : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            CreateTask();
-        }
     }
 
     public static TaskBehaviour RedoPooledTask()
@@ -57,8 +53,8 @@ public class TaskController : MonoBehaviour
         var taskWidth = Screen.width / 8;
         var taskHeight = Screen.height / 8;
 
-        var x = Random.Range(0, Screen.width - taskWidth);
-        var y = Random.Range(0, Screen.height - taskHeight );
+        var x = Random.Range(taskWidth, Screen.width - taskWidth);
+        var y = Random.Range(taskHeight, Screen.height - taskHeight);
 
         var rt = task.gameContainer.GetComponent<RectTransform>();
 
