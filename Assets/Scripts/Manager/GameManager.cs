@@ -18,11 +18,6 @@ public class GameManager : MonoBehaviour
         currentDifficulty += (Time.deltaTime / difficultyIncreaseSeconds);
         currentSpeedAlteredDifficulty = Mathf.Clamp(currentDifficulty * PlayerMovement.MovementSpeed, currentDifficulty, currentDifficulty * PlayerMovement.MovementSpeed);
 
-        if (Input.GetKeyDown(KeyCode.W))
-            PlayerMovement.AlterMoveSpeed(1);
-        if (Input.GetKeyDown(KeyCode.S))
-            PlayerMovement.AlterMoveSpeed(-1);
-
         taskCountDown -= Time.deltaTime;
 
         if (taskCountDown < 0)
@@ -32,6 +27,5 @@ public class GameManager : MonoBehaviour
             TaskController.CreateTask();
             TaskController.RedoPooledTask();
         }
-
     }
 }

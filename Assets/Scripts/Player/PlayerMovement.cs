@@ -50,16 +50,18 @@ public class PlayerMovement : MonoBehaviour
         {
             currentPosition--;
             xPosition -= sidewaysJumpSize;
+            transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
         }
 
         if (Input.GetKeyDown(KeyCode.D) && (lanes / 2) > currentPosition + 1)
         {
             currentPosition++;
             xPosition += sidewaysJumpSize;
+            transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
         }
 
         corretXPosition = xPosition;
-        transform.position = Vector3.Lerp(transform.position, new Vector3(xPosition, startYPos + MovementSpeed, transform.position.z), 0.005f);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, startYPos + MovementSpeed, transform.position.z), 0.005f);
     }
 
     public static void AlterMoveSpeed(float amount)
