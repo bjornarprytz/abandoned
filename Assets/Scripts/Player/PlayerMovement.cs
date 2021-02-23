@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
 
     public AudioClip crashAudioClip;
+    public AudioClip cryAudioClip;
+    public AudioClip investorLaugh;
 
     public static float MovementSpeed { get; private set; }  = 0;
 
@@ -55,10 +57,22 @@ public class PlayerMovement : MonoBehaviour
     public static void AlterMoveSpeed(float amount)
     {
         if (amount > 0)
+        {
             instance.audioPitch += instance.speedPitchIncrease;
+        }
         else
+        {
             instance.audioPitch -= instance.speedPitchIncrease;
-       
+
+            var randomRange = Random.Range(0, 100);
+            if (randomRange < 25)
+                instance.audioSource.PlayOneShot(instance.investorLaugh);
+
+            if (randomRange > 75)
+                instance.audioSource.PlayOneShot(instance.cryAudioClip);
+        }
+           
+      
         MovementSpeed = Mathf.Clamp(MovementSpeed + amount, 0, MovementSpeed + amount);
     }
 
