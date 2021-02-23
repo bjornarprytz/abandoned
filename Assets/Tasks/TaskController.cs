@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TaskController : MonoBehaviour
@@ -6,6 +7,12 @@ public class TaskController : MonoBehaviour
     public TaskBehaviour taskPrefab;
     public MiniGame[] miniGamePool;
 
+    public AudioClip notificationAudioClip;
+
+    private AudioSource audioSource;
+
+    private static Queue<TaskBehaviour> AbandonedTasks { get; set; } = new Queue<TaskBehaviour>();
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -13,40 +20,65 @@ public class TaskController : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            CreateTask(RandomPosition());
+            CreateTask();
         }
     }
 
-
-    public static TaskBehaviour CreateTask(Vector3 screenPosition)
+    public static TaskBehaviour RedoPooledTask()
     {
-        var task = Instantiate(Instance.taskPrefab);
+        if (AbandonedTasks.Count == 0)
+            return null;
+        
+        var task = AbandonedTasks.Dequeue();
 
-        task.StartGame(ChooseGame());
+        Debug.Log("Redoing task");
+
+        if (task != null)
+        {
+            Instance.audioSource.PlayOneShot(Instance.notificationAudioClip);
+            task.ResumeGame();
+        }
 
         return task;
+    }
+
+    public static TaskBehaviour CreateTask()
+    {
+        var task = Instantiate(Instance.taskPrefab, Camera.main.transform);
+
+        var taskWidth = Screen.width / 8;
+        var taskHeight = Screen.height / 8;
+
+        var x = Random.Range(0, Screen.width - taskWidth);
+        var y = Random.Range(0, Screen.height - taskHeight );
+
+        var rt = task.gameContainer.GetComponent<RectTransform>();
+
+        rt.position = new Vector3(x, y);
+        rt.sizeDelta = new Vector2(taskWidth, taskHeight);
+
+        task.StartGame(ChooseGame());
+        Instance.audioSource.PlayOneShot(Instance.notificationAudioClip);
+        return task;
+    }
+
+    public static void AddToPool(TaskBehaviour abandonedTask)
+    {
+        Debug.Log("Adding task to pool");
+
+        AbandonedTasks.Enqueue(abandonedTask);
     }
 
     private static MiniGame ChooseGame()
     {
         return Instance.miniGamePool[Random.Range(0, Instance.miniGamePool.Length)];
     }
-
-    private static Vector3 RandomPosition()
-    {
-        var width = Random.Range(0, Screen.width);
-        var height = Random.Range(0, Screen.height);
-
-        width = Screen.width / 2;
-        height = Screen.height / 2;
-
-        return new Vector3(width, height, 0);
-    }
-
 }
