@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c54ebc83d9e7940bc2f4ef58ebdf56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crashAudioClip: {fileID: 8300000, guid: ba2798c34f42f34498939b9f99dc87b3, type: 3}
   speedPitchIncrease: 0.25
   sidewaysJumpSize: 1
   lanes: 5
@@ -415,7 +416,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

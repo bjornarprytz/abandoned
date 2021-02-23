@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement instance;
+
+    public AudioClip crashAudioClip;
+
     public static float MovementSpeed { get; private set; }  = 0;
 
     public float speedPitchIncrease = 0.5f;
@@ -57,5 +60,11 @@ public class PlayerMovement : MonoBehaviour
             instance.audioPitch -= instance.speedPitchIncrease;
        
         MovementSpeed = Mathf.Clamp(MovementSpeed + amount, 0, MovementSpeed + amount);
+    }
+
+    public static void Crash()
+    {
+        instance.audioSource.Stop();
+        instance.audioSource.PlayOneShot(instance.crashAudioClip);
     }
 }
