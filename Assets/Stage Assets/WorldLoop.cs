@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldLoop : MonoBehaviour
@@ -25,7 +27,7 @@ public class WorldLoop : MonoBehaviour
         float movement = (spdMod * currentSpeed) * Time.deltaTime;
         foreach (Transform chunk in worldChunks)
         {
-            chunk.position = new Vector3(chunk.position.x - movement, 0, 0);
+            chunk.position = new Vector3(0, 0, chunk.position.z - movement);
         }
         distanceCounter += movement;
         if (distanceCounter >= distanceMidway)
@@ -64,7 +66,7 @@ public class WorldLoop : MonoBehaviour
                 Debug.Log("INCORRECT WORLD CHUNK NUMBER!");
                 break;
         }
-        worldChunks[firstChunk].position = new Vector3(worldChunks[finalChunk].position.x + 50, 0, 0);
+        worldChunks[firstChunk].position = new Vector3(0, 0, worldChunks[finalChunk].position.z + 50);
         if (currentChunk >= 4)
         {
             currentChunk = 0;

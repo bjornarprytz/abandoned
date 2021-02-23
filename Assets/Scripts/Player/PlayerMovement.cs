@@ -1,9 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement instance;
-    public static float MovementSpeed { get; private set; } = 0;
+    public static float MovementSpeed { get; private set; }  = 0;
 
     public float speedPitchIncrease = 0.5f;
 
@@ -53,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
             instance.audioPitch += instance.speedPitchIncrease;
         else
             instance.audioPitch -= instance.speedPitchIncrease;
-
+       
         MovementSpeed = Mathf.Clamp(MovementSpeed + amount, 0, MovementSpeed + amount);
     }
 }

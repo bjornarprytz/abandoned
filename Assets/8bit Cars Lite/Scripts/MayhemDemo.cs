@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public class MayhemDemo : MonoBehaviour
-{
+public class MayhemDemo : MonoBehaviour {
     CarFactory cf;
 
-    void Start()
+	void Start ()
     {
         cf = gameObject.GetComponent<CarFactory>();
 
@@ -20,7 +19,7 @@ public class MayhemDemo : MonoBehaviour
         float posX = -camWidth - .55f;
         float posY = -camHeight + .5f;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward);
-        for (int i = 0; i < 16; i++)
+        for (int i=0; i<16; i++)
         {
             GenerateCarLoop(posX, posY, rot);
             posY += incY;

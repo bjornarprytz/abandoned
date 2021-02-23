@@ -4,7 +4,7 @@ public class ClickMe : MiniGame
 {
     public void Awake()
     {
-
+        
     }
 
     public void OnClickDestroy()
