@@ -7,6 +7,10 @@ public class TaskController : MonoBehaviour
     public TaskBehaviour taskPrefab;
     public MiniGame[] miniGamePool;
 
+    public AudioClip notificationAudioClip;
+
+    private AudioSource audioSource;
+
     private static Queue<TaskBehaviour> AbandonedTasks { get; set; } = new Queue<TaskBehaviour>();
 
     public void Awake()
@@ -16,6 +20,8 @@ public class TaskController : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -28,12 +34,16 @@ public class TaskController : MonoBehaviour
 
     public static TaskBehaviour RedoPooledTask()
     {
+        if (AbandonedTasks.Count == 0)
+            return null;
+        
         var task = AbandonedTasks.Dequeue();
 
         Debug.Log("Redoing task");
 
         if (task != null)
         {
+            Instance.audioSource.PlayOneShot(Instance.notificationAudioClip);
             task.ResumeGame();
         }
 
@@ -56,7 +66,7 @@ public class TaskController : MonoBehaviour
         rt.sizeDelta = new Vector2(taskWidth, taskHeight);
 
         task.StartGame(ChooseGame());
-
+        Instance.audioSource.PlayOneShot(Instance.notificationAudioClip);
         return task;
     }
 
