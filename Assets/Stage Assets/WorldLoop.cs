@@ -14,9 +14,6 @@ public class WorldLoop : MonoBehaviour
     // Adjust this modifier until the gamefeel is good.
     private float spdMod = 1f;
 
-    // Change out currentSpeed for whatever the player's speed is set to.
-    public float currentSpeed = 1f;
-
     private void FixedUpdate()
     {
         MoveWorld();
@@ -24,10 +21,10 @@ public class WorldLoop : MonoBehaviour
 
     private void MoveWorld()
     {
-        float movement = (spdMod * currentSpeed) * Time.deltaTime;
+        float movement = (spdMod * PlayerMovement.MovementSpeed) * Time.deltaTime;
         foreach (Transform chunk in worldChunks)
         {
-            chunk.position = new Vector3(0, 0, chunk.position.z - movement);
+            chunk.position = new Vector3(0, chunk.position.y - movement, 0);
         }
         distanceCounter += movement;
         if (distanceCounter >= distanceMidway)
@@ -66,7 +63,7 @@ public class WorldLoop : MonoBehaviour
                 Debug.Log("INCORRECT WORLD CHUNK NUMBER!");
                 break;
         }
-        worldChunks[firstChunk].position = new Vector3(0, 0, worldChunks[finalChunk].position.z + 50);
+        worldChunks[firstChunk].position = new Vector3(0, worldChunks[finalChunk].position.y + 50, 0);
         if (currentChunk >= 4)
         {
             currentChunk = 0;
