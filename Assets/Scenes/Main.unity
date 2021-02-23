@@ -385,6 +385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudioClip: {fileID: 8300000, guid: ba2798c34f42f34498939b9f99dc87b3, type: 3}
+  cryAudioClip: {fileID: 8300000, guid: 4e34340fcf658a44f90b9169aae78724, type: 3}
+  investorLaugh: {fileID: 8300000, guid: 239da30defb14be46915a6457404fb5f, type: 3}
   speedPitchIncrease: 0.25
   sidewaysJumpSize: 1
   lanes: 5
