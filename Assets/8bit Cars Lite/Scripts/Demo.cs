@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 
-public class Demo : MonoBehaviour {
+public class Demo : MonoBehaviour
+{
     CarFactory cf;
 
-    void Start () {
+    void Start()
+    {
         cf = gameObject.GetComponent<CarFactory>();
 
         float incX = 1f;
         float posX = -4.5f;
         float rot = -45f;
 
-        for (int i=0; i<10; i++)
+        for (int i = 0; i < 10; i++)
         {
             GenerateCarLoop(posX, 0f, Quaternion.Euler(0f, 0f, rot));
             posX += incX;

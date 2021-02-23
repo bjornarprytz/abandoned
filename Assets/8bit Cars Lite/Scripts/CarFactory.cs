@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
-public class CarFactory : MonoBehaviour {
+public class CarFactory : MonoBehaviour
+{
 
     public Transform prefab;
     private int carNo = 1;
 
-	public Transform GenerateCar(Vector2 position, Quaternion rotation)
+    public Transform GenerateCar(Vector2 position, Quaternion rotation)
     {
-        string spriteName = "Car" + carNo.ToString().PadLeft(2,'0');
+        string spriteName = "Car" + carNo.ToString().PadLeft(2, '0');
 
         // Loop through all ten cars in order
         carNo++;

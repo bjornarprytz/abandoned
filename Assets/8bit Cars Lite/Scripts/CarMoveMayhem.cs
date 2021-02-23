@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 
-public class CarMoveMayhem : MonoBehaviour {
+public class CarMoveMayhem : MonoBehaviour
+{
 
     Vector2 target;
     Quaternion rot;
-    
-	void Start () {
+
+    void Start()
+    {
         target = transform.position;
         rot = transform.rotation;
 
-        if (rot.z == 0f || rot.z == 1f) 
+        if (rot.z == 0f || rot.z == 1f)
         {
             // car is moving on x axis
             target.x = -target.x;
@@ -20,8 +22,8 @@ public class CarMoveMayhem : MonoBehaviour {
             target.y = -target.y;
         }
     }
-	
-	void FixedUpdate ()
+
+    void FixedUpdate()
     {
         HasArrived();
         transform.rotation = rot;
