@@ -6,6 +6,8 @@ public abstract class MiniGame : MonoBehaviour
     public GameObject gameCanvas;
     public event Action GameCompleted;
 
+    protected bool initialized;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,10 @@ public abstract class MiniGame : MonoBehaviour
     {
     }
 
-    public virtual void Init() { }
+    public virtual void Init() 
+    {
+        initialized = true;
+    }
     public virtual void OnAbandoned() { }
 
     public virtual void OnPause() 
