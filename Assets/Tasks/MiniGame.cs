@@ -8,20 +8,28 @@ public abstract class MiniGame : MonoBehaviour
 
     protected bool initialized;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioClip onStartAudioClip;
+    public AudioClip onCompleteAudioClip;
+
+    protected AudioSource audioSource;
 
     // Update is called once per frame
     void Update()
     {
     }
 
+    private void AddAudioSource()
+    {
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+    }
+
+
     public virtual void Init() 
     {
         initialized = true;
+        AddAudioSource();
+        if (onStartAudioClip != null) audioSource.PlayOneShot(onStartAudioClip);
     }
     public virtual void OnAbandoned() { }
 
@@ -38,8 +46,11 @@ public abstract class MiniGame : MonoBehaviour
     // Call this when the player completes the task
     public virtual void OnCompleted() 
     {
+        AddAudioSource();
+
         if (GameCompleted != null)
         {
+            if (onCompleteAudioClip != null) audioSource.PlayOneShot(onCompleteAudioClip);
             GameCompleted.Invoke();
         }
     }

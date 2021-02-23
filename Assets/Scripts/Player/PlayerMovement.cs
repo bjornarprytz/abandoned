@@ -37,13 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(isDead)
+        instance.audioSource.pitch = Mathf.Lerp(instance.audioSource.pitch, instance.audioPitch, 0.05f);
+
+        if (isDead)
         {
-            instance.audioSource.pitch = Mathf.Lerp(instance.audioSource.pitch, instance.audioPitch, 0.05f);
             MovementSpeed = Mathf.Lerp(MovementSpeed, 0, 0.005f);
             return;
         }
-
 
         float xPosition = corretXPosition;
         if (Input.GetKeyDown(KeyCode.A) && -(lanes / 2) < currentPosition - 1)
@@ -64,8 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
     public static void AlterMoveSpeed(float amount)
     {
-      
-
         if (amount > 0)
         {
             instance.audioPitch += instance.speedPitchIncrease;
@@ -83,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (instance.isDead) return;
+
         MovementSpeed = Mathf.Clamp(MovementSpeed + amount, 0, MovementSpeed + amount);
     }
 
