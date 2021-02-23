@@ -9,12 +9,6 @@ public class GameManager : MonoBehaviour
     public float currentDifficulty = 1;
     public float currentSpeedAlteredDifficulty = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -22,8 +16,8 @@ public class GameManager : MonoBehaviour
         currentSpeedAlteredDifficulty = Mathf.Clamp(currentDifficulty * PlayerMovement.MovementSpeed, currentDifficulty, currentDifficulty * PlayerMovement.MovementSpeed);
 
         if (Input.GetKeyDown(KeyCode.W))
-            PlayerMovement.MovementSpeed++;
+            PlayerMovement.AlterMoveSpeed(1);
         if (Input.GetKeyDown(KeyCode.S))
-            PlayerMovement.MovementSpeed--;
+            PlayerMovement.AlterMoveSpeed(-1);
     }
 }
